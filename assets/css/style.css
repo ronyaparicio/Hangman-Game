@@ -1,0 +1,57 @@
+body {
+	background-image: url(../images/background.jpg);
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	max-width: 100%;
+	background-color: #c3d5e1;
+	margin: 0;
+}
+
+.header::after {
+	content: "";
+	display: block;
+	width: 100%;
+	clear:both;
+}
+
+
+.header h1 {
+	float: left;
+	margin-left: 40px;
+	
+}
+
+.counter {
+	float: right;
+	text-align: center;
+	margin-right: 40px;
+}
+
+.wins {
+	display: inline-block;
+
+}
+
+.losses {
+	display: inline-block;
+}
+
+.container {
+	width: 960px;
+	border: 2px solid white;
+	margin: 20px auto;
+	padding: 20px #fff;
+	height: 700px;
+	background-color: black;
+	color: #fff;
+	margin
+}
+
+.game {
+	display: inline-block;
+	width: 45%;
+	padding-right: 10px;
+}
