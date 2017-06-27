@@ -25,13 +25,17 @@ function pickWord() {
 }
 
 
-//display letter as -
+//display letters as -
 for (var i = 0; i < pickWord.length; i++){
-	hide[i] = "- ";
+	pickWord[i] = "- ";
 }
 
+document.getElementById('word').innerHTML = pickWord();
 
-//idk what i'm doing.
+
+
+
+//Display letters used
 function logger (e) {
 	lettersUsed.push(event.key);
 	writeLetters();
