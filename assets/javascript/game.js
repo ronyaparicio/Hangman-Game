@@ -11,6 +11,9 @@ var words = [
 ['c','h','i','m','e','r','a']
 ]
 
+var shownWord = [];
+var currentWord;
+
 //choose word
 function pickWord() {
 	var randomWord = Math.floor(Math.random()*3)
@@ -26,17 +29,18 @@ function pickWord() {
 
 
 //display letters as -
-for (var i = 0; i < pickWord.length; i++){
-	pickWord[i] = "- ";
+function hideword() {
+	currentWord = pickWord();
+	 for (var i = 0; i < currentWord.length; i++){
+	 	shownWord.push('-')
+ }
 }
-
-document.getElementById('word').innerHTML = pickWord();
 
 
 
 
 //Display letters used
-function logger (e) {
+function keyLogger(e) {
 	lettersUsed.push(event.key);
 	writeLetters();
 }
@@ -45,7 +49,27 @@ function writeLetters () {
 	document.getElementById('LettersUsed').innerHTML =lettersUsed;
 }
 
-document.onkeyup = logger
+
+
+
+hideword ();
+document.getElementById('word').innerHTML = shownWord.join(" ");
+
+
+document.onkeyup = keyLogger
+
+
+
+document.onkeyup = function () {
+	var currentLetter = (event.key);
+
+	for (i = 0; i < currentWord.length; i++) {
+		if (currentLetter===currentWord[i]) {
+			shownWord[i] === currentLetter;
+
+		}
+	}
+}
 
 
 
