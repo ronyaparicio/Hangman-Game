@@ -12,7 +12,8 @@ var words = [
 ]
 
 var shownWord = [];
-var currentWord;
+var currentWord = [];
+var currentLetter;
 
 //choose word
 function pickWord() {
@@ -26,8 +27,6 @@ function pickWord() {
 	    	  return words[2]        
 	    }
 }
-
-
 //display letters as -
 function hideword() {
 	currentWord = pickWord();
@@ -36,9 +35,6 @@ function hideword() {
  }
 }
 
-
-
-
 //Display letters used
 function keyLogger(e) {
 	lettersUsed.push(event.key);
@@ -46,30 +42,32 @@ function keyLogger(e) {
 }
 
 function writeLetters () {
-	document.getElementById('LettersUsed').innerHTML =lettersUsed;
+	document.getElementById('LettersUsed').innerHTML = lettersUsed;
 }
-
-
-
-
 hideword ();
-document.getElementById('word').innerHTML = shownWord.join(" ");
-
-
-document.onkeyup = keyLogger
-
-
-
-document.onkeyup = function () {
-	var currentLetter = (event.key);
-
+//suppose to change the - to corrent letter in correct place
+document.onkeyup = function (e) {
+	keyLogger ();
+	currentLetter = (event.key);
+	
 	for (i = 0; i < currentWord.length; i++) {
-		if (currentLetter===currentWord[i]) {
-			shownWord[i] === currentLetter;
-
+		if (currentLetter === currentWord[i]) {
+			shownWord[i] = currentLetter;
+		}
+		else {
+			guesses--;
 		}
 	}
 }
+
+document.getElementById('word').innerHTML = shownWord.join(" ");
+document.getElementById('www').innerHTML = wins;
+document.getElementById('lll').innerHTML = losses;
+document.getElementById('lives').innerHTML = guesses;
+
+console.log(currentWord);
+console.log(currentLetter);
+
 
 
 
