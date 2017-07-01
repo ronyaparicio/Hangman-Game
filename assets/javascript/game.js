@@ -54,7 +54,7 @@ function writeLetters () {
 hideword ();
 
 //change the - to corrent letter in correct the place
-document.onkeyup = function (e) {
+console.log(document.onkeyup = function (e) {
 	keyLogger ();
 	currentLetter = (event.key);
 	
@@ -74,10 +74,7 @@ document.onkeyup = function (e) {
 		wins++;
 		hideword ();
 	}
-	
-	console.log(shownWord);
-	console.log(currentWord);
-}
+})
 
 function display() {
 	document.getElementById('word').innerHTML = shownWord.join(" ");
