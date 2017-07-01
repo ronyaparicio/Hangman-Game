@@ -32,14 +32,14 @@ function pickWord() {
 function hideword() {
 	shownWord = [];
 	lettersUsed = [];
-	guesses = 11;
+	guesses = 10;
 	currentWord = pickWord();
 	 for (var i = 0; i < currentWord.length; i++){
 	 	shownWord.push('-')
  }
 }
 
-//Display letters used
+//Display letters already used
 function keyLogger (e) {
 	for (var i = 0; i < currentWord.length; i++) {
 		if (event.key !== lettersUsed[i]) {
@@ -48,18 +48,18 @@ function keyLogger (e) {
 	}
 	writeLetters();
 }
-
 function writeLetters () {
 	document.getElementById('LettersUsed').innerHTML = lettersUsed;
 }
+
 hideword ();
 
 //change the - to corrent letter in correct the place
-console.log(document.onkeyup = function (e) {
+document.onkeyup = function (e) {
 	keyLogger ();
 	currentLetter = (event.key);
 	
-	for (i = 0; i < currentWord.length; i++) {
+	for (var i = 0; i < currentWord.length; i++) {
 		if (currentLetter === currentWord[i]) {
 			shownWord[i] = currentLetter;
 		}
@@ -75,11 +75,10 @@ console.log(document.onkeyup = function (e) {
 		wins++;
 		hideword ();
 	}
-})
+}
 
 function display() {
 	document.getElementById('word').innerHTML = shownWord.join(" ");
-
     document.getElementById('www').innerHTML = wins;
     document.getElementById('lll').innerHTML = losses;
     document.getElementById('lives').innerHTML = guesses;
