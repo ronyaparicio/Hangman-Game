@@ -31,6 +31,7 @@ function pickWord() {
 //display letters as -
 function hideword() {
 	shownWord = [];
+	lettersUsed = [];
 	guesses = 11;
 	currentWord = pickWord();
 	 for (var i = 0; i < currentWord.length; i++){
