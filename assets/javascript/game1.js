@@ -4,10 +4,10 @@ let hangman = {
   guessesLeft: 5,
   lettersUsed: [],
   words:[
-    'samurai jack',
-    'avatar the last airbender',
+    'word',
+    'longerword',
     'pokemon',
-    'dragon ball'
+    'dragonBall'
   ],
   shownWord: [],
   currentWord: null,
@@ -30,38 +30,56 @@ let hangman = {
     }
   },
   hideword: ()=>{ hangman.currentWord.forEach(() => {hangman.shownWord.push('-')})},
-  checkletter: () => {
+  checkletter: ()=>{
     hangman.currentLetter = event.key;
-    lettersUsed.push(hangman.currentLetter);
+    hangman.lettersUsed.push(hangman.currentLetter);
     switch (hangman.currentWord.includes(hangman.currentLetter)) {
       case true:
           for (let i = 0; i < hangman.currentWord.length; i++) {
             if (hangman.currentLetter === hangman.currentWord[i]) {
               hangman.shownWord[i] = hangman.currentLetter;
-            };
-          };
+            }
+          }
         break;
       case false:
-        hangman.guessesLeft--;
+        hangman.guessesLeft--
         break;
     }
-  };
-  updateDisplay: ()=>{
-    document.getElementById('word').innerHTML = shownWord.join(" ");
-    document.getElementById('www').innerHTML = wins;
-    document.getElementById('lll').innerHTML = losses;
-    document.getElementById('lives').innerHTML = guesses;
-  }
+  },
+  updateDisplay: () => {
+    document.getElementById('word').innerHTML = hangman.shownWord.join(" ");
+    document.getElementById('www').innerHTML = hangman.wins;
+    document.getElementById('lll').innerHTML = hangman.losses;
+    document.getElementById('lives').innerHTML = hangman.guessesLeft;
+    document.getElementById('LettersUsed').innerHTML = hangman.lettersUsed;
+  },
   checkWin: () => {
-    if (hangman.guessesLeft === 1) {
-      losses++;
+    for (let y = 0; y < hangman.currentWord.length; y++) {
+      if (hangman.shownWord[y] !== hangman.currentWord[y]) {
+        return false;
+      }
+    }
+    return true;
+  },
+  reset: () => {
+    if (hangman.guessesLeft === 0) {
+    	hangman.lettersUsed = [];
+    	hangman.guessesLeft = 5;
+    	hangman.losses++;
+    	hangman.pickWord();
+    	hangman.hideword();
+    	hangman.updateDisplay();
+    } else if (hangman.checkWin()) {
+      hangman.lettersUsed = [];
+      hangman.guessesLeft = 5;
+      hangman.wins++;
       hangman.pickWord();
       hangman.hideword();
       hangman.updateDisplay();
     }
+
   }
 }
-
 
 hangman.pickWord();
 hangman.hideword();
@@ -70,5 +88,9 @@ hangman.updateDisplay();
 document.onkeyup = () => {
   hangman.checkletter();
   hangman.updateDisplay();
-
+  hangman.checkWin();
+  hangman.reset();
+  console.log(hangman.shownWord);
+  console.log(hangman.currentWord);
+  console.log(hangman.checkWin());
 };
