@@ -29,7 +29,7 @@ let hangman = {
         break;
     }
   },
-  hideword: ()=>{ hangman.currentWord.forEach(() => {hangman.shownWord.push('-')})},
+  hideword: ()=>{hangman.shownWord = []; hangman.currentWord.forEach(() => {hangman.shownWord.push('-')})},
   checkletter: ()=>{
     hangman.currentLetter = event.key;
     hangman.lettersUsed.push(hangman.currentLetter);
@@ -68,13 +68,16 @@ let hangman = {
     	hangman.losses++;
     	hangman.pickWord();
     	hangman.hideword();
+
     	hangman.updateDisplay();
+
     } else if (hangman.checkWin()) {
       hangman.lettersUsed = [];
       hangman.guessesLeft = 5;
       hangman.wins++;
       hangman.pickWord();
       hangman.hideword();
+
       hangman.updateDisplay();
     }
 
