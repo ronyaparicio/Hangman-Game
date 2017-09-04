@@ -32,9 +32,11 @@ let hangman = {
   hideword: ()=>{hangman.shownWord = []; hangman.currentWord.forEach(() => {hangman.shownWord.push('-')})},
   checkletter: ()=>{
     hangman.currentLetter = event.key;
-    hangman.lettersUsed.push(hangman.currentLetter);
     switch (hangman.currentWord.includes(hangman.currentLetter)) {
       case true:
+          if (!hangman.lettersUsed.includes(hangman.currentLetter)) {
+            hangman.lettersUsed.push(hangman.currentLetter);
+          };
           for (let i = 0; i < hangman.currentWord.length; i++) {
             if (hangman.currentLetter === hangman.currentWord[i]) {
               hangman.shownWord[i] = hangman.currentLetter;
@@ -42,7 +44,10 @@ let hangman = {
           }
         break;
       case false:
-        hangman.guessesLeft--
+        if (!hangman.lettersUsed.includes(hangman.currentLetter)) {
+          hangman.lettersUsed.push(hangman.currentLetter);
+          hangman.guessesLeft--;
+        }
         break;
     }
   },
@@ -93,7 +98,4 @@ document.onkeyup = () => {
   hangman.updateDisplay();
   hangman.checkWin();
   hangman.reset();
-  console.log(hangman.shownWord);
-  console.log(hangman.currentWord);
-  console.log(hangman.checkWin());
 };
